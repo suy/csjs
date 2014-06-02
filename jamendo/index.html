@@ -27,6 +27,47 @@
   TEMPLATES
 -->
 
+<script type="text/html" id="LoginFormView">
+<form role="form">
+  <div class="form-group">
+    <label for="jamendo-username">User name</label>
+    <input type="email" class="form-control" id="jamendo-username" placeholder="User name">
+  </div>
+  <div class="form-group">
+    <label for="jamendo-password">Password</label>
+    <input type="password" class="form-control" id="jamendo-password" placeholder="Password">
+  </div>
+  <button type="submit" class="btn btn-default">Submit</button>
+</form>
+</script>
+
+
+
+<!--
+  CODE
+-->
+<script type="text/javascript">
+var App = new Marionette.Application();
+
+App.addRegions({
+	main: '#app-main'
+});
+
+App.LoginView = Marionette.ItemView.extend({
+	template: '#LoginFormView',
+});
+
+App.on("initialize:after", function() {
+	var loginView = new App.LoginView();
+	App.main.show(loginView);
+});
+
+$(document).ready(function() {
+	App.start();
+});
+
+</script>
+
 </head>
 
 <!--
@@ -34,6 +75,9 @@
 -->
 <body>
 
+<div id="app-main">
+	You should not see this in the page.
+</div>
 
 
 </body>
