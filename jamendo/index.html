@@ -55,9 +55,9 @@ App.LoginView = Marionette.ItemView.extend({
 		pass: '#jamendo-password',
 	},
 	events: {
-		"submit form": "somethingChanged",
+		"submit": "loginFormSubmitted",
 	},
-	somethingChanged: function(e) {
+	loginFormSubmitted: function(e) {
 		e.preventDefault();
 		console.log(this.ui.user.val(), this.ui.pass.val());
 		return false;
