@@ -24,7 +24,6 @@
 -->
 
 <script type="text/html" id="LoginFormView">
-<form role="form">
   <div class="form-group">
     <label for="jamendo-username">User name</label>
     <input type="text" class="form-control" id="jamendo-username" placeholder="User name">
@@ -34,7 +33,6 @@
     <input type="password" class="form-control" id="jamendo-password" placeholder="Password">
   </div>
   <button type="submit" class="btn btn-default">Submit</button>
-</form>
 </script>
 
 
@@ -46,10 +44,11 @@
 var App = new Marionette.Application();
 
 App.addRegions({
-	main: '#app-main'
+	main: 'body'
 });
 
 App.LoginView = Marionette.ItemView.extend({
+	tagName: 'form', attributes: {"role":"form"},
 	template: '#LoginFormView',
 	ui: {
 		user: '#jamendo-username',
@@ -83,10 +82,7 @@ $(document).ready(function() {
 -->
 <body>
 
-<div id="app-main">
-	You should not see this in the page.
-</div>
-
+<p>You should not see this in the page.</p>
 
 </body>
 </html>
