@@ -31,7 +31,7 @@
 <form role="form">
   <div class="form-group">
     <label for="jamendo-username">User name</label>
-    <input type="email" class="form-control" id="jamendo-username" placeholder="User name">
+    <input type="text" class="form-control" id="jamendo-username" placeholder="User name">
   </div>
   <div class="form-group">
     <label for="jamendo-password">Password</label>
@@ -55,6 +55,18 @@ App.addRegions({
 
 App.LoginView = Marionette.ItemView.extend({
 	template: '#LoginFormView',
+	ui: {
+		user: '#jamendo-username',
+		pass: '#jamendo-password',
+	},
+	events: {
+		"submit form": "somethingChanged",
+	},
+	somethingChanged: function(e) {
+		e.preventDefault();
+		console.log(this.ui.user.val(), this.ui.pass.val());
+		return false;
+	}
 });
 
 App.on("initialize:after", function() {
