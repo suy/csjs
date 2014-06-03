@@ -59,14 +59,21 @@ App.LoginView = Marionette.ItemView.extend({
 	},
 	loginFormSubmitted: function(e) {
 		e.preventDefault();
-		console.log(this.ui.user.val(), this.ui.pass.val());
+		var user = this.ui.user.val(), pass = this.ui.pass.val();
+		console.log("On the view:", user, pass);
+		this.trigger("loginRequested", {'user': user, 'pass': pass});
 		return false;
 	}
 });
 
+var loginView = new App.LoginView();
+
 App.on("initialize:after", function() {
-	var loginView = new App.LoginView();
 	App.main.show(loginView);
+});
+
+App.listenTo(loginView, 'loginRequested', function(data) {
+	console.log("On the app: login requested", data);
 });
 
 $(document).ready(function() {
