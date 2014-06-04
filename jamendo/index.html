@@ -44,7 +44,7 @@
 var App = new Marionette.Application();
 
 App.addRegions({
-	main: 'body'
+	bodyRegion: 'body'
 });
 
 App.LoginView = Marionette.ItemView.extend({
@@ -69,7 +69,7 @@ App.LoginView = Marionette.ItemView.extend({
 var loginView = new App.LoginView();
 
 App.on("initialize:after", function() {
-	App.main.show(loginView);
+	App.bodyRegion.show(loginView);
 });
 
 App.listenTo(loginView, 'loginRequested', function(data) {
