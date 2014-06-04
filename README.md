@@ -18,6 +18,8 @@ http://todomvc.com/
 
 http://bootstraptour.com/
 
+http://ruby.bvision.com/blog/please-stop-embedding-bootstrap-classes-in-your-html
+
 
 Backbone
 --------
