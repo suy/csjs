@@ -20,10 +20,12 @@
 
 
 <!--
-  TEMPLATES
+-
+- LOGIN TEMPLATE
+-
 -->
 
-<script type="text/html" id="LoginFormTemplate">
+<script type="text/html" id="LoginViewTemplate">
   <div class="form-group">
     <label for="jamendo-username">User name</label>
     <input type="text" class="form-control" id="jamendo-username" placeholder="User name">
@@ -35,6 +37,12 @@
   <button type="submit" class="btn btn-default">Submit</button>
 </script>
 
+
+<!--
+-
+- BODY LAYOUT TEMPLATE
+-
+-->
 
 <!-- The "Main" view has 3 parts: header, sidebar, and central -->
 <script type="text/html" id="BodyLayoutTemplate">
@@ -115,8 +123,11 @@
 
 
 <!--
-  CODE
+-
+- APP CODE
+-
 -->
+
 <script type="text/javascript">
 var App = new Marionette.Application();
 
@@ -126,7 +137,7 @@ App.addRegions({
 
 App.LoginView = Marionette.ItemView.extend({
 	tagName: 'form', attributes: {"role":"form"},
-	template: '#LoginFormTemplate',
+	template: '#LoginViewTemplate',
 	ui: {
 		user: '#jamendo-username',
 		pass: '#jamendo-password',
@@ -174,8 +185,11 @@ $(document).ready(function() {
 </head>
 
 <!--
-  BODY
+-
+- BODY
+-
 -->
+
 <body>
 
 <p>You should not see this in the page.</p>
