@@ -42,6 +42,14 @@ http://coenraets.org/blog/2012/02/sample-app-with-backbone-js-and-twitter-bootst
 Marionette
 ----------
 
+### Examples
+
+http://dmytroyarmak.github.io/marionette-contact-manager/
+
+### Managing the views
+http://www.smashingmagazine.com/2013/02/11/introduction-backbone-marionette/
+
+http://lostechies.com/derickbailey/2012/03/22/managing-layouts-and-nested-views-with-backbone-marionette/
 
 ### Dependencies
 
