@@ -36,6 +36,83 @@
 </script>
 
 
+<!-- The "Main" view has 3 parts: header, sidebar, and central -->
+<script type="text/html" id="BodyLayoutTemplate">
+
+<!-- header -->
+<div id="app-header" class="jumbotron">
+<h1>Header</h1>
+</div>
+
+<div class="container-fluid">
+	<div class="row">
+
+	<!-- sidebar -->
+	<div id="app-sidebar" class="col-md-3">
+		<ul>
+		<li>foo</li>
+		<li>bar</li>
+		<li>baz</li>
+		<li>quux</li>
+		</ul>
+	</div>
+
+	<!-- central -->
+	<div id="app-central" class="col-md-9">
+		<p>
+		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
+		porttitor dignissim leo ac molestie. Duis fermentum ante mattis libero
+		scelerisque malesuada. Suspendisse justo lorem, commodo ac pulvinar
+		eget, euismod quis enim. Duis quis turpis ullamcorper elit gravida
+		blandit. Nunc blandit ultrices enim. Quisque lacinia est et purus auctor
+		tempus. Sed sit amet leo vel urna consectetur dictum. Donec imperdiet
+		semper lectus, eget porttitor leo porttitor mollis. Curabitur ultrices
+		bibendum neque nec lacinia. Sed tempus fermentum purus. Quisque eget
+		lectus quis nisl interdum egestas. Quisque at rhoncus libero. Etiam
+		tellus libero, laoreet eu mattis a, varius ultricies nunc. Ut ornare
+		urna eu mi bibendum blandit. Integer hendrerit metus ac purus faucibus
+		at tincidunt dolor lacinia. Suspendisse sit amet nibh eget nisl
+		scelerisque bibendum.
+		</p>
+		<p>
+		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
+		porttitor dignissim leo ac molestie. Duis fermentum ante mattis libero
+		scelerisque malesuada. Suspendisse justo lorem, commodo ac pulvinar
+		eget, euismod quis enim. Duis quis turpis ullamcorper elit gravida
+		blandit. Nunc blandit ultrices enim. Quisque lacinia est et purus auctor
+		tempus. Sed sit amet leo vel urna consectetur dictum. Donec imperdiet
+		semper lectus, eget porttitor leo porttitor mollis. Curabitur ultrices
+		bibendum neque nec lacinia. Sed tempus fermentum purus. Quisque eget
+		lectus quis nisl interdum egestas. Quisque at rhoncus libero. Etiam
+		tellus libero, laoreet eu mattis a, varius ultricies nunc. Ut ornare
+		urna eu mi bibendum blandit. Integer hendrerit metus ac purus faucibus
+		at tincidunt dolor lacinia. Suspendisse sit amet nibh eget nisl
+		scelerisque bibendum.
+		</p>
+		<p>
+		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
+		porttitor dignissim leo ac molestie. Duis fermentum ante mattis libero
+		scelerisque malesuada. Suspendisse justo lorem, commodo ac pulvinar
+		eget, euismod quis enim. Duis quis turpis ullamcorper elit gravida
+		blandit. Nunc blandit ultrices enim. Quisque lacinia est et purus auctor
+		tempus. Sed sit amet leo vel urna consectetur dictum. Donec imperdiet
+		semper lectus, eget porttitor leo porttitor mollis. Curabitur ultrices
+		bibendum neque nec lacinia. Sed tempus fermentum purus. Quisque eget
+		lectus quis nisl interdum egestas. Quisque at rhoncus libero. Etiam
+		tellus libero, laoreet eu mattis a, varius ultricies nunc. Ut ornare
+		urna eu mi bibendum blandit. Integer hendrerit metus ac purus faucibus
+		at tincidunt dolor lacinia. Suspendisse sit amet nibh eget nisl
+		scelerisque bibendum.
+		</p>
+	</div>
+
+
+	</div>
+</div>
+
+
+</script>
+
 
 <!--
   CODE
@@ -66,6 +143,16 @@ App.LoginView = Marionette.ItemView.extend({
 	}
 });
 
+App.BodyLayout = Backbone.Marionette.Layout.extend({
+	attributes: {data: "foo"},
+	template: "#BodyLayoutTemplate",
+	regions: {
+		headerRegion:  "#app-header",
+		sidebarRegion: "#app-sidebar",
+		centralRegion: "#app-central"
+	}
+});
+
 var loginView = new App.LoginView();
 
 App.on("initialize:after", function() {
@@ -74,6 +161,8 @@ App.on("initialize:after", function() {
 
 App.listenTo(loginView, 'loginRequested', function(data) {
 	console.log("On the app: login requested", data);
+	var bodyLayout = new App.BodyLayout();
+	App.bodyRegion.show(bodyLayout);
 });
 
 $(document).ready(function() {
