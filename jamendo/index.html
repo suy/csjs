@@ -23,7 +23,7 @@
   TEMPLATES
 -->
 
-<script type="text/html" id="LoginFormView">
+<script type="text/html" id="LoginFormTemplate">
   <div class="form-group">
     <label for="jamendo-username">User name</label>
     <input type="text" class="form-control" id="jamendo-username" placeholder="User name">
@@ -49,7 +49,7 @@ App.addRegions({
 
 App.LoginView = Marionette.ItemView.extend({
 	tagName: 'form', attributes: {"role":"form"},
-	template: '#LoginFormView',
+	template: '#LoginFormTemplate',
 	ui: {
 		user: '#jamendo-username',
 		pass: '#jamendo-password',
