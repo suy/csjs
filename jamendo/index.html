@@ -63,6 +63,10 @@
 		<li>baz</li>
 		<li>quux</li>
 		</ul>
+
+		<button id="app-logout" type="button" class="btn btn-default">
+			<span class="glyphicon glyphicon-log-out"></span> log out
+		</button>
 	</div>
 
 	<!-- central -->
@@ -130,6 +134,22 @@
 
 <script type="text/javascript">
 var App = new Marionette.Application();
+App.token = localStorage.getItem("token");
+
+App.router = new Marionette.AppRouter({
+	routes: {
+		"": function() {
+			console.log("Router triggered on the index");
+			if (App.token) {
+				this.navigate("home", {trigger: true, replace: true});
+			} else {
+				this.navigate("login", {trigger: true, replace: true});
+			}
+		},
+		"home": "home",
+		"login": "login",
+	},
+});
 
 App.addRegions({
 	bodyRegion: 'body'
@@ -149,7 +169,7 @@ App.LoginView = Marionette.ItemView.extend({
 		e.preventDefault();
 		var user = this.ui.user.val(), pass = this.ui.pass.val();
 		console.log("On the view:", user, pass);
-		this.trigger("loginRequested", {'user': user, 'pass': pass});
+		App.trigger("loginRequested", {'user': user, 'pass': pass});
 		return false;
 	}
 });
@@ -161,19 +181,62 @@ App.BodyLayout = Backbone.Marionette.Layout.extend({
 		headerRegion:  "#app-header",
 		sidebarRegion: "#app-sidebar",
 		centralRegion: "#app-central"
+	},
+	events: {
+		// FIXME: match "#app-logout click" instead, but that doesn't work.
+		"click": function(e) {
+			console.log("App logout clicked");
+			e.preventDefault();
+			App.trigger("logoutRequested");
+			return false;
+		}
 	}
 });
 
-var loginView = new App.LoginView();
 
 App.on("initialize:after", function() {
-	App.bodyRegion.show(loginView);
+	Backbone.history.start();
 });
 
-App.listenTo(loginView, 'loginRequested', function(data) {
+App.listenTo(App.router, "all", function(x) {
+	console.log("Event in the router --", x);
+})
+
+App.listenTo(App.router, "route:login", function() {
+	if (!App.token) {
+			console.log("App: showing login screen");
+			if (!App._loginView) {
+				App._loginView = new App.LoginView();
+			}
+			App.bodyRegion.show(App._loginView);
+	}
+});
+
+App.listenTo(App.router, "route:home", function() {
+	if (!App._bodyLayout) {
+		App._bodyLayout = new App.BodyLayout();
+	}
+	App.bodyRegion.show(App._bodyLayout);
+})
+
+App.on("logoutRequested", function() {
+	console.log("App: logging out");
+	localStorage.removeItem("token");
+	App.token = null;
+	App.router.navigate("login", {trigger: true});
+	// var loginView = new App.LoginView();
+	// App.bodyRegion.show(loginView);
+});
+
+App.on("loginRequested", function(data) {
 	console.log("On the app: login requested", data);
-	var bodyLayout = new App.BodyLayout();
-	App.bodyRegion.show(bodyLayout);
+	if (data.user && (data.user === data.pass)) {
+		console.log("login correct");
+		App.token = localStorage.setItem("token", data.user);
+		App.router.navigate("home", {trigger: true});
+	} else {
+		alert("login failed");
+	}
 });
 
 $(document).ready(function() {
