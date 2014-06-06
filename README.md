@@ -20,6 +20,8 @@ http://bootstraptour.com/
 
 http://ruby.bvision.com/blog/please-stop-embedding-bootstrap-classes-in-your-html
 
+https://github.com/addyosmani/backbonejs-gallery
+
 
 Backbone
 --------
@@ -29,6 +31,9 @@ Backbone
 http://addyosmani.github.io/backbone-fundamentals/
 
 http://ricostacruz.com/backbone-patterns/
+
+**Excellent**
+https://github.com/tbranyen/backbone.layoutmanager/wiki/Overview
 
 https://backbone-patterns.heroku.com/
 
@@ -45,6 +50,7 @@ Marionette
 ### Examples
 
 http://dmytroyarmak.github.io/marionette-contact-manager/
+http://dmytroyarmak.github.io/codeangels-marionette-introduction/
 
 ### Managing the views
 http://www.smashingmagazine.com/2013/02/11/introduction-backbone-marionette/
