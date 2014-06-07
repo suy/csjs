@@ -1,5 +1,5 @@
 <html>
-<head><title>Jamendo API toy application</title>
+<head><title>Marionette application proof of concept</title>
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
@@ -27,12 +27,12 @@
 
 <script type="text/html" id="LoginViewTemplate">
   <div class="form-group">
-    <label for="jamendo-username">User name</label>
-    <input type="text" class="form-control" id="jamendo-username" placeholder="User name">
+    <label for="app-username">User name</label>
+    <input type="text" class="form-control" id="app-username" placeholder="User name">
   </div>
   <div class="form-group">
-    <label for="jamendo-password">Password</label>
-    <input type="password" class="form-control" id="jamendo-password" placeholder="Password">
+    <label for="app-password">Password</label>
+    <input type="password" class="form-control" id="app-password" placeholder="Password">
   </div>
   <button type="submit" class="btn btn-default">Submit</button>
 </script>
@@ -159,8 +159,8 @@ App.LoginView = Marionette.ItemView.extend({
 	tagName: 'form', attributes: {"role":"form"},
 	template: '#LoginViewTemplate',
 	ui: {
-		user: '#jamendo-username',
-		pass: '#jamendo-password',
+		user: '#app-username',
+		pass: '#app-password',
 	},
 	events: {
 		"submit": "loginFormSubmitted",
