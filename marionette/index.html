@@ -203,19 +203,15 @@ App.listenTo(App.router, "all", function(x) {
 
 App.listenTo(App.router, "route:login", function() {
 	if (!App.token) {
-			console.log("App: showing login screen");
-			if (!App._loginView) {
-				App._loginView = new App.LoginView();
-			}
-			App.bodyRegion.show(App._loginView);
+		console.log("App: showing login screen");
+		var loginView = new App.LoginView();
+		App.bodyRegion.show(loginView);
 	}
 });
 
 App.listenTo(App.router, "route:home", function() {
-	if (!App._bodyLayout) {
-		App._bodyLayout = new App.BodyLayout();
-	}
-	App.bodyRegion.show(App._bodyLayout);
+	var bodyLayout = new App.BodyLayout();
+	App.bodyRegion.show(bodyLayout);
 })
 
 App.on("logoutRequested", function() {
