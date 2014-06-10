@@ -7,6 +7,10 @@
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore.js"></script>
 
+<!-- GitHub -->
+<script src="https://raw.githubusercontent.com/michael/github/master/lib/base64.js"></script>
+<script src="https://raw.githubusercontent.com/michael/github/master/github.js"></script>
+
 <!-- Framework stuff -->
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone.js"></script>
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/backbone.marionette/1.8.6/backbone.marionette.js"></script>
@@ -202,16 +206,17 @@ App.listenTo(App.router, "all", function(x) {
 })
 
 App.listenTo(App.router, "route:login", function() {
-	if (!App.token) {
-		console.log("App: showing login screen");
-		var loginView = new App.LoginView();
-		App.bodyRegion.show(loginView);
-	}
+	console.log("App: showing login screen");
+	App.bodyRegion.show(new App.LoginView());
 });
 
 App.listenTo(App.router, "route:home", function() {
-	var bodyLayout = new App.BodyLayout();
-	App.bodyRegion.show(bodyLayout);
+	if (App.token) {
+		App.bodyRegion.show(new App.BodyLayout());
+	} else {
+		App.router.navigate("login");
+		App.bodyRegion.show(new App.LoginView());
+	}
 })
 
 App.on("logoutRequested", function() {
@@ -228,7 +233,8 @@ App.on("loginRequested", function(data) {
 	if (data.user && (data.user === data.pass)) {
 		console.log("login correct");
 		App.token = localStorage.setItem("token", data.user);
-		App.router.navigate("home", {trigger: true});
+		App.router.navigate("home");
+		App.bodyRegion.show(new App.BodyLayout());
 	} else {
 		alert("login failed");
 	}
