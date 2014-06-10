@@ -223,9 +223,8 @@ App.on("logoutRequested", function() {
 	console.log("App: logging out");
 	localStorage.removeItem("token");
 	App.token = null;
-	App.router.navigate("login", {trigger: true});
-	// var loginView = new App.LoginView();
-	// App.bodyRegion.show(loginView);
+	App.router.navigate("login");
+	App.bodyRegion.show(new App.LoginView());
 });
 
 App.on("loginRequested", function(data) {
