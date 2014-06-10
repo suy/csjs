@@ -186,8 +186,7 @@ App.BodyLayout = Backbone.Marionette.Layout.extend({
 		centralRegion: "#app-central"
 	},
 	events: {
-		// FIXME: match "#app-logout click" instead, but that doesn't work.
-		"click": function(e) {
+		"click #app-logout": function(e) {
 			console.log("App logout clicked");
 			e.preventDefault();
 			App.trigger("logoutRequested");
