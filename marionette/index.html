@@ -221,13 +221,13 @@ App.BodyLayout = Backbone.Marionette.Layout.extend({
 	},
 	setText: function(text) {
 		console.log(this.centralRegion);
-		this.centralRegion.html(text);
+		this.$(this.centralRegion.el).html(text);
 	},
 });
 
 App.menuClicked = function(x) {
 	console.log("** menuClicked callback", x);
-	console.log(App.bodyRegion);
+	App.bodyRegion.currentView.setText(x);
 };
 
 
