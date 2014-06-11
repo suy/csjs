@@ -200,9 +200,9 @@ App.on("initialize:after", function() {
 	Backbone.history.start();
 });
 
-App.listenTo(App.router, "all", function(x) {
-	console.log("Event in the router --", x);
-})
+App.listenTo(App.router, "all", function(x, y) {
+	console.debug("Event in the router --", x, y);
+});
 
 App.listenTo(App.router, "route:login", function() {
 	console.log("App: showing login screen");
