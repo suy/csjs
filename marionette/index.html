@@ -179,11 +179,21 @@ App.LoginView = Marionette.ItemView.extend({
 });
 
 App.BodyLayout = Backbone.Marionette.Layout.extend({
+	initialize: function() {
+		App.listenTo(this, "menuClicked", App.menuClicked);
+	},
 	template: "#BodyLayoutTemplate",
 	regions: {
 		headerRegion:  "#app-header",
 		sidebarRegion: "#app-sidebar",
 		centralRegion: "#app-central"
+	},
+	ui: {
+		logout: '#app-logout',
+		foo:  '#app-sidebar ul li:nth-child(1)',
+		bar:  '#app-sidebar ul li:nth-child(2)',
+		baz:  '#app-sidebar ul li:nth-child(3)',
+		quux: '#app-sidebar ul li:nth-child(4)',
 	},
 	events: {
 		"click #app-logout": function(e) {
@@ -191,9 +201,34 @@ App.BodyLayout = Backbone.Marionette.Layout.extend({
 			e.preventDefault();
 			App.trigger("logoutRequested");
 			return false;
-		}
-	}
+		},
+		"click @ui.foo": function(e) {
+			console.log("foo clicked");
+			this.trigger("menuClicked", "foo");
+		},
+		"click @ui.bar": function(e) {
+			console.log("bar clicked");
+			this.trigger("menuClicked", "bar");
+		},
+		"click @ui.baz": function(e) {
+			console.log("baz clicked");
+			this.trigger("menuClicked", "baz");
+		},
+		"click @ui.quux": function(e) {
+			console.log("quux clicked");
+			this.trigger("menuClicked", "quux");
+		},
+	},
+	setText: function(text) {
+		console.log(this.centralRegion);
+		this.centralRegion.html(text);
+	},
 });
+
+App.menuClicked = function(x) {
+	console.log("** menuClicked callback", x);
+	console.log(App.bodyRegion);
+};
 
 
 App.on("initialize:after", function() {
