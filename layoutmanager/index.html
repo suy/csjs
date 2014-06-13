@@ -1,0 +1,278 @@
+<html>
+<head><title>LayoutManager application proof of concept</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<!-- Basic utility libs -->
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore.js"></script>
+
+<!-- GitHub -->
+<script src="https://raw.githubusercontent.com/michael/github/master/lib/base64.js"></script>
+<script src="https://raw.githubusercontent.com/michael/github/master/github.js"></script>
+
+<!-- Framework stuff -->
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/backbone.layoutmanager/0.9.4/backbone.layoutmanager.js"></script>
+
+<!-- Bootstrap -->
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+<!-- Optional theme -->
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+<!-- Latest compiled and minified JavaScript -->
+<script type="text/javascript" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+
+<!--
+-
+- LOGIN TEMPLATE
+-
+-->
+
+<script type="text/html" id="LoginViewTemplate">
+  <div class="form-group">
+    <label for="app-username">User name</label>
+    <input type="text" class="form-control" id="app-username" placeholder="User name">
+  </div>
+  <div class="form-group">
+    <label for="app-password">Password</label>
+    <input type="password" class="form-control" id="app-password" placeholder="Password">
+  </div>
+  <button type="submit" class="btn btn-default">Submit</button>
+</script>
+
+
+<!--
+-
+- BODY LAYOUT TEMPLATE
+-
+-->
+
+<!-- The "Main" view has 3 parts: header, sidebar, and central -->
+<script type="text/html" id="BodyLayoutTemplate">
+
+<!-- header -->
+<div id="app-header" class="jumbotron">
+<h1>Header</h1>
+</div>
+
+<div class="container-fluid">
+	<div class="row">
+
+	<!-- sidebar -->
+	<div id="app-sidebar" class="col-md-3">
+		<ul>
+		<li>foo</li>
+		<li>bar</li>
+		<li>baz</li>
+		<li>quux</li>
+		</ul>
+
+		<button id="app-logout" type="button" class="btn btn-default">
+			<span class="glyphicon glyphicon-log-out"></span> log out
+		</button>
+	</div>
+
+	<!-- central -->
+	<div id="app-central" class="col-md-9">
+		<p>
+		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
+		porttitor dignissim leo ac molestie. Duis fermentum ante mattis libero
+		scelerisque malesuada. Suspendisse justo lorem, commodo ac pulvinar
+		eget, euismod quis enim. Duis quis turpis ullamcorper elit gravida
+		blandit. Nunc blandit ultrices enim. Quisque lacinia est et purus auctor
+		tempus. Sed sit amet leo vel urna consectetur dictum. Donec imperdiet
+		semper lectus, eget porttitor leo porttitor mollis. Curabitur ultrices
+		bibendum neque nec lacinia. Sed tempus fermentum purus. Quisque eget
+		lectus quis nisl interdum egestas. Quisque at rhoncus libero. Etiam
+		tellus libero, laoreet eu mattis a, varius ultricies nunc. Ut ornare
+		urna eu mi bibendum blandit. Integer hendrerit metus ac purus faucibus
+		at tincidunt dolor lacinia. Suspendisse sit amet nibh eget nisl
+		scelerisque bibendum.
+		</p>
+		<p>
+		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
+		porttitor dignissim leo ac molestie. Duis fermentum ante mattis libero
+		scelerisque malesuada. Suspendisse justo lorem, commodo ac pulvinar
+		eget, euismod quis enim. Duis quis turpis ullamcorper elit gravida
+		blandit. Nunc blandit ultrices enim. Quisque lacinia est et purus auctor
+		tempus. Sed sit amet leo vel urna consectetur dictum. Donec imperdiet
+		semper lectus, eget porttitor leo porttitor mollis. Curabitur ultrices
+		bibendum neque nec lacinia. Sed tempus fermentum purus. Quisque eget
+		lectus quis nisl interdum egestas. Quisque at rhoncus libero. Etiam
+		tellus libero, laoreet eu mattis a, varius ultricies nunc. Ut ornare
+		urna eu mi bibendum blandit. Integer hendrerit metus ac purus faucibus
+		at tincidunt dolor lacinia. Suspendisse sit amet nibh eget nisl
+		scelerisque bibendum.
+		</p>
+		<p>
+		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
+		porttitor dignissim leo ac molestie. Duis fermentum ante mattis libero
+		scelerisque malesuada. Suspendisse justo lorem, commodo ac pulvinar
+		eget, euismod quis enim. Duis quis turpis ullamcorper elit gravida
+		blandit. Nunc blandit ultrices enim. Quisque lacinia est et purus auctor
+		tempus. Sed sit amet leo vel urna consectetur dictum. Donec imperdiet
+		semper lectus, eget porttitor leo porttitor mollis. Curabitur ultrices
+		bibendum neque nec lacinia. Sed tempus fermentum purus. Quisque eget
+		lectus quis nisl interdum egestas. Quisque at rhoncus libero. Etiam
+		tellus libero, laoreet eu mattis a, varius ultricies nunc. Ut ornare
+		urna eu mi bibendum blandit. Integer hendrerit metus ac purus faucibus
+		at tincidunt dolor lacinia. Suspendisse sit amet nibh eget nisl
+		scelerisque bibendum.
+		</p>
+	</div>
+
+
+	</div>
+</div>
+
+
+</script>
+
+
+<!--
+-
+- APP CODE
+-
+-->
+
+<script type="text/javascript">
+var App = _.clone(Backbone.Events);
+App.token = localStorage.getItem("token");
+
+App.router = new Backbone.Router({
+	routes: {
+		"": function() {
+			console.log("Router triggered on the index");
+			if (App.token) {
+				this.navigate("home", {trigger: true, replace: true});
+			} else {
+				this.navigate("login", {trigger: true, replace: true});
+			}
+		},
+		"home": "home",
+		"login": "login",
+	},
+});
+
+App.BodyView = Backbone.Layout.extend({
+	el: 'body'
+});
+
+App.LoginView = Backbone.Layout.extend({
+	tagName: 'form', attributes: {"role":"form"},
+	initialize: function() {
+		console.log("login view initialized");
+	},
+	template: '#LoginViewTemplate',
+	events: {
+		"submit": "loginFormSubmitted",
+	},
+	loginFormSubmitted: function(e) {
+		e.preventDefault();
+		var user = this.$('#app-username').val(), pass = this.$('#app-password').val();
+		console.log("On the view:", user, pass);
+		App.trigger("loginRequested", {'user': user, 'pass': pass});
+		return false;
+	}
+});
+
+App.BodyLayout = Backbone.Layout.extend({
+	initialize: function() {
+		App.listenTo(this, "menuClicked", App.menuClicked);
+	},
+	template: "#BodyLayoutTemplate",
+	events: {
+		"click #app-logout": function(e) {
+			console.log("App logout clicked");
+			e.preventDefault();
+			App.trigger("logoutRequested");
+			return false;
+		},
+		"click #app-sidebar ul li:nth-child(1)": function(e) {
+			console.log("foo clicked");
+			this.trigger("menuClicked", "foo");
+		},
+		"click #app-sidebar ul li:nth-child(2)": function(e) {
+			console.log("bar clicked");
+			this.trigger("menuClicked", "bar");
+		},
+		"click #app-sidebar ul li:nth-child(3)": function(e) {
+			console.log("baz clicked");
+			this.trigger("menuClicked", "baz");
+		},
+		"click #app-sidebar ul li:nth-child(4)": function(e) {
+			console.log("quux clicked");
+			this.trigger("menuClicked", "quux");
+		},
+	},
+	setText: function(text) {
+		this.$("#app-central").html(text);
+	},
+});
+
+App.menuClicked = function(x) {
+	console.log("** menuClicked callback", x);
+	App.bodyRegion.getView('').setText(x);
+};
+
+App.listenTo(App.router, "all", function(x, y) {
+	console.debug("Event in the router --", x, y);
+});
+
+App.listenTo(App.router, "route:login", function() {
+	console.log("App: showing login screen");
+	App.bodyRegion.setView("", new App.LoginView()).render();
+});
+
+App.listenTo(App.router, "route:home", function() {
+	if (App.token) {
+		App.bodyRegion.setView("", new App.BodyLayout()).render();
+	} else {
+		App.router.navigate("login");
+		App.bodyRegion.setView("", new App.LoginView()).render();
+	}
+})
+
+App.on("logoutRequested", function() {
+	console.log("App: logging out");
+	localStorage.removeItem("token");
+	App.token = null;
+	App.router.navigate("login");
+	App.bodyRegion.setView("", new App.LoginView()).render();
+});
+
+App.on("loginRequested", function(data) {
+	console.log("On the app: login requested", data);
+	if (data.user && (data.user === data.pass)) {
+		console.log("login correct");
+		App.token = localStorage.setItem("token", data.user);
+		App.router.navigate("home");
+		App.bodyRegion.setView("", new App.BodyLayout()).render();
+	} else {
+		alert("login failed");
+	}
+});
+
+$(document).ready(function() {
+	App.bodyRegion = new App.BodyView();
+	App.bodyRegion.render();
+	Backbone.history.start();
+});
+
+</script>
+
+</head>
+
+<!--
+-
+- BODY
+-
+-->
+
+<body>
+
+<p>You should not see this in the page.</p>
+
+</body>
+</html>
