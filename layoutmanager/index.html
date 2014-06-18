@@ -103,7 +103,6 @@ condimentum dignissim quis sed neque.</p>
 
 <!-- header -->
 <div id="app-header" class="jumbotron">
-<h1>Header</h1>
 </div>
 
 <div class="container-fluid">
@@ -111,65 +110,10 @@ condimentum dignissim quis sed neque.</p>
 
 	<!-- sidebar -->
 	<div id="app-sidebar" class="col-md-3">
-		<ul>
-		<li>foo</li>
-		<li>bar</li>
-		<li>baz</li>
-		<li>quux</li>
-		</ul>
-
-		<button id="app-logout" type="button" class="btn btn-default">
-			<span class="glyphicon glyphicon-log-out"></span> log out
-		</button>
 	</div>
 
 	<!-- central -->
 	<div id="app-central" class="col-md-9">
-		<p>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
-		porttitor dignissim leo ac molestie. Duis fermentum ante mattis libero
-		scelerisque malesuada. Suspendisse justo lorem, commodo ac pulvinar
-		eget, euismod quis enim. Duis quis turpis ullamcorper elit gravida
-		blandit. Nunc blandit ultrices enim. Quisque lacinia est et purus auctor
-		tempus. Sed sit amet leo vel urna consectetur dictum. Donec imperdiet
-		semper lectus, eget porttitor leo porttitor mollis. Curabitur ultrices
-		bibendum neque nec lacinia. Sed tempus fermentum purus. Quisque eget
-		lectus quis nisl interdum egestas. Quisque at rhoncus libero. Etiam
-		tellus libero, laoreet eu mattis a, varius ultricies nunc. Ut ornare
-		urna eu mi bibendum blandit. Integer hendrerit metus ac purus faucibus
-		at tincidunt dolor lacinia. Suspendisse sit amet nibh eget nisl
-		scelerisque bibendum.
-		</p>
-		<p>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
-		porttitor dignissim leo ac molestie. Duis fermentum ante mattis libero
-		scelerisque malesuada. Suspendisse justo lorem, commodo ac pulvinar
-		eget, euismod quis enim. Duis quis turpis ullamcorper elit gravida
-		blandit. Nunc blandit ultrices enim. Quisque lacinia est et purus auctor
-		tempus. Sed sit amet leo vel urna consectetur dictum. Donec imperdiet
-		semper lectus, eget porttitor leo porttitor mollis. Curabitur ultrices
-		bibendum neque nec lacinia. Sed tempus fermentum purus. Quisque eget
-		lectus quis nisl interdum egestas. Quisque at rhoncus libero. Etiam
-		tellus libero, laoreet eu mattis a, varius ultricies nunc. Ut ornare
-		urna eu mi bibendum blandit. Integer hendrerit metus ac purus faucibus
-		at tincidunt dolor lacinia. Suspendisse sit amet nibh eget nisl
-		scelerisque bibendum.
-		</p>
-		<p>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
-		porttitor dignissim leo ac molestie. Duis fermentum ante mattis libero
-		scelerisque malesuada. Suspendisse justo lorem, commodo ac pulvinar
-		eget, euismod quis enim. Duis quis turpis ullamcorper elit gravida
-		blandit. Nunc blandit ultrices enim. Quisque lacinia est et purus auctor
-		tempus. Sed sit amet leo vel urna consectetur dictum. Donec imperdiet
-		semper lectus, eget porttitor leo porttitor mollis. Curabitur ultrices
-		bibendum neque nec lacinia. Sed tempus fermentum purus. Quisque eget
-		lectus quis nisl interdum egestas. Quisque at rhoncus libero. Etiam
-		tellus libero, laoreet eu mattis a, varius ultricies nunc. Ut ornare
-		urna eu mi bibendum blandit. Integer hendrerit metus ac purus faucibus
-		at tincidunt dolor lacinia. Suspendisse sit amet nibh eget nisl
-		scelerisque bibendum.
-		</p>
 	</div>
 
 
@@ -178,6 +122,44 @@ condimentum dignissim quis sed neque.</p>
 
 
 </script>
+
+<script type="text/html" id="HeaderView">
+<h1>Header</h1>
+</script>
+
+<script type="text/html" id="SidebarView">
+<ul>
+<li>foo</li>
+<li>bar</li>
+<li>baz</li>
+<li>quux</li>
+</ul>
+
+<button id="app-logout" type="button" class="btn btn-default">
+	<span class="glyphicon glyphicon-log-out"></span> log out
+</button>
+</script>
+
+
+<script type="text/html" id="CentralView">
+<p>
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent
+porttitor dignissim leo ac molestie. Duis fermentum ante mattis libero
+scelerisque malesuada. Suspendisse justo lorem, commodo ac pulvinar
+eget, euismod quis enim. Duis quis turpis ullamcorper elit gravida
+blandit. Nunc blandit ultrices enim. Quisque lacinia est et purus auctor
+tempus. Sed sit amet leo vel urna consectetur dictum. Donec imperdiet
+semper lectus, eget porttitor leo porttitor mollis. Curabitur ultrices
+bibendum neque nec lacinia. Sed tempus fermentum purus. Quisque eget
+lectus quis nisl interdum egestas. Quisque at rhoncus libero. Etiam
+tellus libero, laoreet eu mattis a, varius ultricies nunc. Ut ornare
+urna eu mi bibendum blandit. Integer hendrerit metus ac purus faucibus
+at tincidunt dolor lacinia. Suspendisse sit amet nibh eget nisl
+scelerisque bibendum.
+</p>
+</script>
+
+
 
 
 <!--
@@ -227,11 +209,28 @@ App.LoginView = Backbone.Layout.extend({
 	}
 });
 
+App.HeaderView = Backbone.Layout.extend({
+	template: '#HeaderView'
+});
+
+App.SidebarView = Backbone.Layout.extend({
+	template: '#SidebarView'
+});
+
+App.CentralView = Backbone.Layout.extend({
+	template: '#CentralView'
+});
+
 App.BodyLayout = Backbone.Layout.extend({
 	initialize: function() {
 		App.listenTo(this, "menuClicked", App.menuClicked);
 	},
 	template: "#BodyLayout",
+	views: {
+		"#app-header": new App.HeaderView(),
+		"#app-sidebar": new App.SidebarView(),
+		"#app-central": new App.CentralView(),
+	},
 	events: {
 		"click #app-logout": function(e) {
 			console.log("App logout clicked");
@@ -277,7 +276,11 @@ App.listenTo(App.router, "route:login", function() {
 
 App.listenTo(App.router, "route:home", function() {
 	if (App.token) {
-		App.bodyRegion.setView("", new App.BodyLayout()).render();
+		var x = new App.BodyLayout();
+		console.debug(x, x.$el.html());
+		console.debug(x.render().$el.html());
+		// App.bodyRegion.setView("", new App.BodyLayout()).render();
+		App.bodyRegion.setView("", x).render();
 	} else {
 		App.router.navigate("login");
 		App.bodyRegion.setView("", new App.LoginView()).render();
