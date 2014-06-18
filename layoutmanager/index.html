@@ -80,6 +80,7 @@ condimentum dignissim quis sed neque.</p>
 -->
 
 <script type="text/html" id="LoginView">
+  <form role="form">
   <div class="form-group">
     <label for="app-username">User name</label>
     <input type="text" class="form-control" id="app-username" placeholder="User name">
@@ -89,6 +90,7 @@ condimentum dignissim quis sed neque.</p>
     <input type="password" class="form-control" id="app-password" placeholder="Password">
   </div>
   <button type="submit" class="btn btn-default">Submit</button>
+  </form>
 </script>
 
 
@@ -192,7 +194,7 @@ App.BodyView = Backbone.Layout.extend({
 });
 
 App.LoginView = Backbone.Layout.extend({
-	tagName: 'form', attributes: {"role":"form"},
+	el: false,
 	initialize: function() {
 		console.log("login view initialized");
 	},
@@ -210,22 +212,22 @@ App.LoginView = Backbone.Layout.extend({
 });
 
 App.HeaderView = Backbone.Layout.extend({
-	template: '#HeaderView'
+	template: '#HeaderView', el: false
 });
 
 App.SidebarView = Backbone.Layout.extend({
-	template: '#SidebarView'
+	template: '#SidebarView', el: false
 });
 
 App.CentralView = Backbone.Layout.extend({
-	template: '#CentralView'
+	template: '#CentralView', el: false
 });
 
 App.BodyLayout = Backbone.Layout.extend({
 	initialize: function() {
 		App.listenTo(this, "menuClicked", App.menuClicked);
 	},
-	template: "#BodyLayout",
+	template: "#BodyLayout", el: false,
 	views: {
 		"#app-header": new App.HeaderView(),
 		"#app-sidebar": new App.SidebarView(),
