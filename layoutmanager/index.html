@@ -216,7 +216,7 @@ App.HeaderView = Backbone.Layout.extend({
 });
 
 App.SidebarView = Backbone.Layout.extend({
-	template: '#SidebarView', el: false
+	template: '#SidebarView'
 });
 
 App.CentralView = Backbone.Layout.extend({
@@ -227,12 +227,12 @@ App.BodyLayout = Backbone.Layout.extend({
 	initialize: function() {
 		App.listenTo(this, "menuClicked", App.menuClicked);
 	},
-	template: "#BodyLayout", el: false,
-	views: {
-		"#app-header": new App.HeaderView(),
-		"#app-sidebar": new App.SidebarView(),
-		"#app-central": new App.CentralView(),
-	},
+	template: "#BodyLayout",
+	// views: {
+	// 	"#app-header": new App.HeaderView(),
+	// 	"#app-sidebar": new App.SidebarView(),
+	// 	"#app-central": new App.CentralView(),
+	// },
 	events: {
 		"click #app-logout": function(e) {
 			console.log("App logout clicked");
@@ -278,11 +278,13 @@ App.listenTo(App.router, "route:login", function() {
 
 App.listenTo(App.router, "route:home", function() {
 	if (App.token) {
-		var x = new App.BodyLayout();
-		console.debug(x, x.$el.html());
-		console.debug(x.render().$el.html());
 		// App.bodyRegion.setView("", new App.BodyLayout()).render();
-		App.bodyRegion.setView("", x).render();
+		var x = new App.BodyLayout();
+		x.setView("#app-header", new App.HeaderView());
+		x.setView("#app-sidebar", new App.SidebarView());
+		x.setView("#app-central", new App.CentralView());
+		App.bodyRegion.setView("", x)
+		App.bodyRegion.render();
 	} else {
 		App.router.navigate("login");
 		App.bodyRegion.setView("", new App.LoginView()).render();
@@ -303,7 +305,13 @@ App.on("loginRequested", function(data) {
 		console.log("login correct");
 		App.token = localStorage.setItem("token", data.user);
 		App.router.navigate("home");
-		App.bodyRegion.setView("", new App.BodyLayout()).render();
+		// App.bodyRegion.setView("", new App.BodyLayout()).render();
+		var x = new App.BodyLayout();
+		x.setView("#app-header", new App.HeaderView());
+		x.setView("#app-sidebar", new App.SidebarView());
+		x.setView("#app-central", new App.CentralView());
+		App.bodyRegion.setView(x)
+		App.bodyRegion.render();
 	} else {
 		alert("login failed");
 	}
