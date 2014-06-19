@@ -13,7 +13,7 @@
 
 <!-- Framework stuff -->
 <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone.js"></script>
-<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/backbone.layoutmanager/0.9.4/backbone.layoutmanager.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/backbone.layoutmanager/0.9.5/backbone.layoutmanager.js"></script>
 
 <!-- Bootstrap -->
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
@@ -227,11 +227,11 @@ App.BodyLayout = Backbone.Layout.extend({
 		App.listenTo(this, "menuClicked", App.menuClicked);
 	},
 	template: "#BodyLayout",
-	// views: {
-	// 	"#app-header": new App.HeaderView(),
-	// 	"#app-sidebar": new App.SidebarView(),
-	// 	"#app-central": new App.CentralView(),
-	// },
+	views: {
+		"#app-header": new App.HeaderView(),
+		"#app-sidebar": new App.SidebarView(),
+		"#app-central": new App.CentralView(),
+	},
 	events: {
 		"click #app-logout": function(e) {
 			console.log("App logout clicked");
@@ -277,13 +277,7 @@ App.listenTo(App.router, "route:login", function() {
 
 App.listenTo(App.router, "route:home", function() {
 	if (App.token) {
-		// App.bodyRegion.setView("", new App.BodyLayout()).render();
-		var x = new App.BodyLayout();
-		x.setView("#app-header", new App.HeaderView());
-		x.setView("#app-sidebar", new App.SidebarView());
-		x.setView("#app-central", new App.CentralView());
-		App.bodyRegion.setView("", x)
-		App.bodyRegion.render();
+		App.bodyRegion.setView("", new App.BodyLayout()).render();
 	} else {
 		App.router.navigate("login");
 		App.bodyRegion.setView("", new App.LoginView()).render();
@@ -304,13 +298,7 @@ App.on("loginRequested", function(data) {
 		console.log("login correct");
 		App.token = localStorage.setItem("token", data.user);
 		App.router.navigate("home");
-		// App.bodyRegion.setView("", new App.BodyLayout()).render();
-		var x = new App.BodyLayout();
-		x.setView("#app-header", new App.HeaderView());
-		x.setView("#app-sidebar", new App.SidebarView());
-		x.setView("#app-central", new App.CentralView());
-		App.bodyRegion.setView(x)
-		App.bodyRegion.render();
+		App.bodyRegion.setView("", new App.BodyLayout()).render();
 	} else {
 		alert("login failed");
 	}
