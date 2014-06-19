@@ -17,10 +17,15 @@ http://www.artandlogic.com/blog/2012/07/prototypal-vs-functional-inheritance-in-
 
 http://trephine.org/t/index.php?title=Understanding_the_JavaScript_new_keyword
 
+### Backbone specific OOP with extend
 http://blog.rjzaworski.com/2012/02/backbone-js-inheritance/
+
 https://coderwall.com/p/xj81ua
+
 http://blog.usefunnel.com/2011/03/js-inheritance-with-backbone/
+
 http://www.erichynds.com/blog/backbone-and-inheritance
+
 http://stackoverflow.com/questions/13105574/extend-using-underscore-vs-backbone
 
 
