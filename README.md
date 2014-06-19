@@ -1,10 +1,28 @@
 csjs
 ====
 
-My Client Side JavaScript tests
+Some examples using client side JavaScript with some frameworks (well, just
+Backbone for now, but with extensions like LayoutManager or Marionette, since
+Backbone alone is ridiculously under featured).
 
 Notes
 =====
+
+Language
+--------
+
+http://javascriptweblog.wordpress.com/2010/06/07/understanding-javascript-prototypes/
+
+http://www.artandlogic.com/blog/2012/07/prototypal-vs-functional-inheritance-in-javascript/
+
+http://trephine.org/t/index.php?title=Understanding_the_JavaScript_new_keyword
+
+http://blog.rjzaworski.com/2012/02/backbone-js-inheritance/
+https://coderwall.com/p/xj81ua
+http://blog.usefunnel.com/2011/03/js-inheritance-with-backbone/
+http://www.erichynds.com/blog/backbone-and-inheritance
+http://stackoverflow.com/questions/13105574/extend-using-underscore-vs-backbone
+
 
 Basics
 ------
