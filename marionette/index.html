@@ -312,7 +312,7 @@ App.listenTo(App.router, "route:home", function() {
 		App.router.navigate("login");
 		App.bodyRegion.show(new App.LoginView());
 	}
-})
+});
 
 App.on("logoutRequested", function() {
 	console.log("App: logging out");
