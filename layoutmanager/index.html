@@ -197,9 +197,6 @@ App.BodyView = Backbone.Layout.extend({
 
 App.LoginView = Backbone.Layout.extend({
 	el: false,
-	initialize: function() {
-		console.log("login view initialized");
-	},
 	template: '#LoginView',
 	events: {
 		"submit": "loginFormSubmitted",
