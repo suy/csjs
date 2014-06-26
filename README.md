@@ -28,6 +28,10 @@ http://www.erichynds.com/blog/backbone-and-inheritance
 
 http://stackoverflow.com/questions/13105574/extend-using-underscore-vs-backbone
 
+But beware, because even if some of those posts mention the existence of
+`__super__`, the creator of Backbone and CoffeeScript only placed it there to
+ease the lives of CoffeeScript developers. So `__super__` is not supposed to be
+there. https://github.com/jashkenas/backbone/pull/787
 
 Basics
 ------
