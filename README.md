@@ -61,7 +61,11 @@ https://github.com/twbs/bootstrap/pull/13772
 
 http://www.blacktie.co/demo/counter/
 
+http://stackoverflow.com/questions/21301316/how-to-bootstrap-navbar-static-to-fixed-on-scroll
+
 http://www.bootply.com/107973
+
+https://github.com/twbs/bootstrap/pull/13904
 
 Backbone
 --------
