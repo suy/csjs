@@ -49,6 +49,19 @@ http://ruby.bvision.com/blog/please-stop-embedding-bootstrap-classes-in-your-htm
 
 https://github.com/addyosmani/backbonejs-gallery
 
+http://glyphsearch.com/
+
+http://www.smashingmagazine.com/2013/03/12/customizing-bootstrap/
+
+http://getbootstrap.com/examples/theme/
+
+https://github.com/twbs/bootstrap/issues/12783
+
+https://github.com/twbs/bootstrap/pull/13772
+
+http://www.blacktie.co/demo/counter/
+
+http://www.bootply.com/107973
 
 Backbone
 --------
@@ -69,6 +82,13 @@ http://lostechies.com/derickbailey/2011/09/15/zombies-run-managing-page-transiti
 ### Examples
 
 http://coenraets.org/blog/2012/02/sample-app-with-backbone-js-and-twitter-bootstrap/
+
+### Problems
+
+* ["Backbone is a bit unique in that its best documentation is its source."](https://github.com/jashkenas/backbone/issues/3205)
+* [The many uses of Model#toJSON](https://github.com/jashkenas/backbone/issues/2134)
+* [The documentation was wrong till
+  2013](https://github.com/braddunbar/backbone/commit/7f24896e4f90106587b5fd2ef3d7507de0d04826)
 
 
 Marionette
