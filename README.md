@@ -43,13 +43,18 @@ Misc
 ----
 http://todomvc.com/
 
-http://bootstraptour.com/
-
-http://ruby.bvision.com/blog/please-stop-embedding-bootstrap-classes-in-your-html
-
 https://github.com/addyosmani/backbonejs-gallery
 
 http://glyphsearch.com/
+
+http://www.blacktie.co/demo/counter/
+
+Bootstrap
+---------
+
+http://bootstraptour.com/
+
+http://ruby.bvision.com/blog/please-stop-embedding-bootstrap-classes-in-your-html
 
 http://www.smashingmagazine.com/2013/03/12/customizing-bootstrap/
 
@@ -59,13 +64,13 @@ https://github.com/twbs/bootstrap/issues/12783
 
 https://github.com/twbs/bootstrap/pull/13772
 
-http://www.blacktie.co/demo/counter/
-
 http://stackoverflow.com/questions/21301316/how-to-bootstrap-navbar-static-to-fixed-on-scroll
 
 http://www.bootply.com/107973
 
 https://github.com/twbs/bootstrap/pull/13904
+
+[Sass/Less Comparison](https://gist.github.com/chriseppstein/674726)
 
 Backbone
 --------
