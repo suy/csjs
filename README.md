@@ -17,6 +17,20 @@ http://www.artandlogic.com/blog/2012/07/prototypal-vs-functional-inheritance-in-
 
 http://trephine.org/t/index.php?title=Understanding_the_JavaScript_new_keyword
 
+http://trephine.org/t/index.php?title=JavaScript_classes
+
+http://trephine.org/t/index.php?title=Simple_prototypal_inheritance
+
+http://docs.closure-library.googlecode.com/git/local_closure_goog_base.js.source.html
+
+https://developers.google.com/closure/library/docs/introduction
+
+http://prototypejs.org/learn/class-inheritance
+
+http://bolinfest.com/javascript/inheritance.php
+
+
+
 ### Backbone specific OOP with extend
 http://blog.rjzaworski.com/2012/02/backbone-js-inheritance/
 
@@ -88,6 +102,8 @@ https://backbone-patterns.heroku.com/
 
 http://lostechies.com/derickbailey/2011/09/15/zombies-run-managing-page-transitions-in-backbone-apps/
 
+http://dailyjs.com/2013/04/04/backbone-tutorial-16/
+
 ### Examples
 
 http://coenraets.org/blog/2012/02/sample-app-with-backbone-js-and-twitter-bootstrap/
@@ -99,6 +115,9 @@ http://coenraets.org/blog/2012/02/sample-app-with-backbone-js-and-twitter-bootst
 * [The documentation was wrong till
   2013](https://github.com/braddunbar/backbone/commit/7f24896e4f90106587b5fd2ef3d7507de0d04826)
 
+### On event systems, jQuery, etc.
+
+https://github.com/jashkenas/backbone/commit/7dbfecc6c12f962455ad34ed87b8af954d05db82#diff-0d56d0d310de7ff18b3cef9c2f8f75dcR98
 
 Marionette
 ----------
